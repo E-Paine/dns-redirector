@@ -20,7 +20,10 @@ def get_local_addr():
 
 def handle_request(data, source):
     config = get_config()
-    request = dnslib.DNSRecord.parse(data)
+    try:
+        request = dnslib.DNSRecord.parse(data)
+    except dnslib.DNSError:
+        return b""
     qname = str(request.q.qname)
     qtype_e = request.q.qtype
     qtype = dnslib.QTYPE[qtype_e]
