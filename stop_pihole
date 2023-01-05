@@ -1,0 +1,4 @@
+#!/usr/bin/sh
+pihole disable
+sudo systemctl stop pihole-FTL
+sudo systemctl stop lighttpd
