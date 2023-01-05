@@ -3,7 +3,7 @@ import socketserver
 import threading
 
 import dnslib
-from dns import resolver
+from dns import exception, resolver
 
 from util import get_config
 
@@ -49,16 +49,19 @@ def handle_request(data, source):
 
 
 def forward_request(reply, qname, qtype, qtype_e, config):
-    for ans in resolver.resolve(qname, qtype):
-        reply.add_answer(
-            dnslib.RR(
-                rname=qname,
-                rtype=qtype_e,
-                rclass=1,
-                ttl=config["dns_ttl"],
-                rdata=getattr(dnslib, qtype)(ans.to_text()),
+    try:
+        for ans in resolver.resolve(qname, qtype):
+            reply.add_answer(
+                dnslib.RR(
+                    rname=qname,
+                    rtype=qtype_e,
+                    rclass=1,
+                    ttl=config["dns_ttl"],
+                    rdata=getattr(dnslib, qtype)(ans.to_text()),
+                )
             )
-        )
+    except exception.DNSException as e:
+        print(e)
 
 
 def get_server():

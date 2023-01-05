@@ -1,13 +1,12 @@
 {
-  "dns_port": 1025,
+  "dns_port": 53,
   "dns_ttl": 300,
-  "http_port": 1080,
+  "http_port": 80,
   "device_specific": {
-    "127.0.0.1": {
-      "comment": "My computer",
-      "redirect": "https://google.com/teapot",
+    "192.168.21.26": {
+      "redirect": "https://www.google.com/teapot",
       "allowed_domains": [
-        "google.co.uk"
+        "www.gstatic.com"
       ]
     }
   }
