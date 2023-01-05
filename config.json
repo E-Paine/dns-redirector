@@ -1,0 +1,14 @@
+{
+  "dns_port": 1025,
+  "dns_ttl": 300,
+  "http_port": 1080,
+  "device_specific": {
+    "127.0.0.1": {
+      "comment": "My computer",
+      "redirect": "https://google.com/teapot",
+      "allowed_domains": [
+        "google.co.uk"
+      ]
+    }
+  }
+}
