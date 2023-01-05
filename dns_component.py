@@ -22,7 +22,8 @@ def handle_request(data, source):
     config = get_config()
     try:
         request = dnslib.DNSRecord.parse(data)
-    except dnslib.DNSError:
+    except dnslib.DNSError as e:
+        print(e)
         return b""
     qname = str(request.q.qname)
     qtype_e = request.q.qtype
