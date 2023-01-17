@@ -79,7 +79,7 @@ def get_server():
 class DNSRequestHandler(socketserver.BaseRequestHandler):
     def handle(self):
         self.request[1].sendto(
-            handle_request(self.request[0].strip(), self.client_address[0]),
+            handle_request(self.request[0], self.client_address[0]),
             self.client_address,
         )
 
