@@ -16,9 +16,9 @@ class HTTPRequestHandler(http.server.BaseHTTPRequestHandler):
         self.end_headers()
 
 
-def get_server(port):
+def get_server(key="http_port"):
     server = http.server.HTTPServer(
-        ("0.0.0.0", port), HTTPRequestHandler
+        ("0.0.0.0", get_config()[key]), HTTPRequestHandler
     )
     thread = threading.Thread(target=server.serve_forever)
     return Component(server, thread)

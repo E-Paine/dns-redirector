@@ -2,6 +2,7 @@
   "dns_port": 53,
   "dns_ttl": 300,
   "http_port": 80,
+  "https_port": 443,
   "device_specific": {
     "192.168.1.2": {
       "redirect": "https://www.google.com/teapot",

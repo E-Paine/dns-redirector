@@ -1,14 +1,14 @@
 class Component:
 
     def __init__(self, server, thread):
-        self._thread = thread
-        self._server = server
+        self.thread = thread
+        self.server = server
 
     def start(self):
-        self._thread.start()
+        self.thread.start()
 
     def join(self):
-        self._thread.join()
+        self.thread.join()
 
     def shutdown(self):
-        self._server.shutdown()
+        self.server.shutdown()
