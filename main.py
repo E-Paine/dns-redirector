@@ -11,10 +11,8 @@ if __name__ == "__main__":
     util.set_config(config)
     dns = dns_component.get_server()
     http = http_component.get_server(80)
-    https = http_component.get_server(443)
     dns.start()
     http.start()
-    https.start()
     try:
         dns.join()
     except KeyboardInterrupt:
@@ -22,7 +20,5 @@ if __name__ == "__main__":
     finally:
         dns.shutdown()
         http.shutdown()
-        https.shutdown()
     dns.join()
     http.join()
-    https.join()
