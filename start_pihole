@@ -1,0 +1,4 @@
+#!/bin/sh
+sudo systemctl start pihole-FTL
+sudo systemctl start lighttpd
+pihole enable
