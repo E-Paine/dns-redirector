@@ -1,4 +1,5 @@
 {
+  "config_refresh_time": 30,
   "dns_port": 53,
   "dns_ttl": 300,
   "http_port": 80,

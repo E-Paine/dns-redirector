@@ -6,16 +6,15 @@ import https_component
 import util
 
 if __name__ == "__main__":
-    with open("config.json") as f:
-        config = json.load(f)
+    util.set_config_file("config.json")
 
-    util.set_config(config)
     dns = dns_component.get_server()
     http = http_component.get_server()
     https = https_component.get_server()
     dns.start()
     http.start()
     https.start()
+
     try:
         dns.join()
     except KeyboardInterrupt:
