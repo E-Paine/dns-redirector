@@ -1,6 +1,6 @@
 class Component:
 
-    def __init__(self, thread, server):
+    def __init__(self, server, thread):
         self._thread = thread
         self._server = server
 
