@@ -4,21 +4,25 @@ import dns_component
 import http_component
 import util
 
-with open("config.json") as f:
-    config = json.load(f)
+if __name__ == "__main__":
+    with open("config.json") as f:
+        config = json.load(f)
 
-util.set_config(config)
-dns_server, dns_thread = dns_component.get_server()
-http_server, http_thread = http_component.get_server()
-dns_thread.start()
-http_thread.start()
-try:
-    dns_thread.join()
-    http_thread.join()
-except KeyboardInterrupt:
-    pass
-finally:
-    dns_server.shutdown()
-    http_server.shutdown()
-dns_thread.join()
-http_thread.join()
+    util.set_config(config)
+    dns = dns_component.get_server()
+    http = http_component.get_server(80)
+    https = http_component.get_server(443)
+    dns.start()
+    http.start()
+    https.start()
+    try:
+        dns.join()
+    except KeyboardInterrupt:
+        pass
+    finally:
+        dns.shutdown()
+        http.shutdown()
+        https.shutdown()
+    dns.join()
+    http.join()
+    https.join()

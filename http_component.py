@@ -1,6 +1,7 @@
 import http.server
 import threading
 
+from base_component import Component
 from util import get_config
 
 
@@ -15,9 +16,9 @@ class HTTPRequestHandler(http.server.BaseHTTPRequestHandler):
         self.end_headers()
 
 
-def get_server():
+def get_server(port):
     server = http.server.HTTPServer(
-        ("0.0.0.0", get_config()["http_port"]), HTTPRequestHandler
+        ("0.0.0.0", port), HTTPRequestHandler
     )
     thread = threading.Thread(target=server.serve_forever)
-    return server, thread
+    return Component(server, thread)

@@ -5,6 +5,7 @@ import threading
 import dnslib
 from dns import exception, resolver
 
+from base_component import Component
 from util import get_config
 
 
@@ -73,7 +74,7 @@ def get_server():
         ("0.0.0.0", get_config()["dns_port"]), DNSRequestHandler
     )
     thread = threading.Thread(target=server.serve_forever)
-    return server, thread
+    return Component(server, thread)
 
 
 class DNSRequestHandler(socketserver.BaseRequestHandler):
