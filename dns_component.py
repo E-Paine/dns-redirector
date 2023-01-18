@@ -1,3 +1,4 @@
+import datetime
 import socket
 import socketserver
 import threading
@@ -9,14 +10,11 @@ from base_component import Component
 from util import get_config
 
 
-resolver.get_default_resolver().nameservers = ["8.8.8.8"]
-
-
 def get_local_addr():
     with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as sock:
         sock.connect(("8.8.8.8", 80))
         addr = sock.getsockname()[0]
-    return "AAAA" if ":" in addr else "A", addr
+    return "A", addr
 
 
 def handle_request(data, source):
@@ -33,6 +31,10 @@ def handle_request(data, source):
     reply = dnslib.DNSRecord(
         dnslib.DNSHeader(id=request.header.id, qr=1, aa=1, ra=1), q=request.q
     )
+    if datetime.datetime.now() < get_config()["activation_time"]:
+        forward_request(reply, qname, qtype, qtype_e, config)
+        return reply.pack()
+
     device = config["device_specific"].get(source)
     if device is None:
         forward_request(reply, qname, qtype, qtype_e, config)

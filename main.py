@@ -1,5 +1,3 @@
-import json
-
 import dns_component
 import http_component
 import https_component

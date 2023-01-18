@@ -1,7 +1,9 @@
 {
   "config_refresh_time": 30,
+  "activation_time": "2022-04-01 08:00:00",
+  "dns_upstream": "8.8.8.8",
   "dns_port": 53,
-  "dns_ttl": 300,
+  "dns_ttl": 60,
   "http_port": 80,
   "https_port": 443,
   "device_specific": {

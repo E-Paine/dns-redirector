@@ -1,7 +1,10 @@
+import datetime
 import json
 import threading
 import time
 from urllib import parse
+
+from dns import resolver
 
 
 config = None
@@ -18,7 +21,9 @@ def set_config(new_conf):
             device["allowed_domains"]
             + [parse.urlparse(device["redirect"]).netloc.split(":")[0]]
         )
+    new_conf["activation_time"] = datetime.datetime.strptime(new_conf["activation_time"], "%Y-%m-%d %H:%M:%S")
     config = new_conf
+    resolver.get_default_resolver().nameservers = [new_conf["dns_upstream"]]
 
 
 def set_config_file(file):
