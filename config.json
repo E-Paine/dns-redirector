@@ -6,11 +6,18 @@
   "dns_ttl": 60,
   "http_port": 80,
   "https_port": 443,
+  "whitelist_chrome_hsts": true,
+  "global_whitelist": [
+    "fonts.googleapis.com",
+    "fonts.gstatic.com"
+  ],
   "device_specific": {
-    "192.168.1.2": {
-      "redirect": "https://www.google.com/teapot",
+    "192.168.21.240": {
+      "redirect": "https://www.communistparty.org.uk",
+      "file": false,
       "allowed_domains": [
-        "www.gstatic.com"
+        "c0.wp.com",
+        "i0.wp.com"
       ]
     }
   }
